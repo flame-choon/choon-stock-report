@@ -1,0 +1,144 @@
+{
+  "tickers": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Technology",
+      "industry": "Customer Electronics"
+    },
+    {
+      "ticker": "GOOG",
+      "name": "Alphabet Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Communication Services",
+      "industry": "Internet Content & Information"
+    },
+    {
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Technology",
+      "industry": "Semiconductors"
+    },
+    {
+      "ticker": "TTWO",
+      "name": "Take-Two Interactive Software, Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Communication Services",
+      "industry": "Electronic Gaming & Multimedia"
+    },
+    {
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor Manufacturing Company Limited",
+      "exchange": "NYSE",
+      "sector": "Technology",
+      "industry": "Semiconductors"
+    },
+    {
+      "ticker": "CME",
+      "name": "CME Group Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Financial Services",
+      "industry": "Financial Data & Stock Exchanges"
+    },
+    {
+      "ticker": "PLTR",
+      "name": "Palantir Technologies Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Technology",
+      "industry": "Software - Infrastructure"
+    },
+    {
+      "ticker": "FTNT",
+      "name": "Fortinet, Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Technology",
+      "industry": "Software - Infrastructure"
+    },
+    {
+      "ticker": "PANW",
+      "name": "Palo Alto Networks, Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Technology",
+      "industry": "Software - Infrastructure"
+    },
+    {
+      "ticker": "ZS",
+      "name": "Zscaler, Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Technology",
+      "industry": "Software - Infrastructure"
+    },
+    {
+      "ticker": "CPNG",
+      "name": "Coupang, Inc.",
+      "exchange": "NYSE",
+      "sector": "Consumer Cyclical",
+      "industry": "Internet Retail"
+    },
+    {
+      "ticker": "OKTA",
+      "name": "Okta, Inc.",
+      "exchange": "NASDAQ",
+      "sector": "Technology",
+      "industry": "Software - Infrastructure"
+    },
+    {
+      "ticker": "HOOD",
+      "name": "Robinhood Markets, Inc. ",
+      "exchange": "NASDAQ",
+      "sector": "Financial Services",
+      "industry": "Capital Markets"
+    },
+    {
+      "ticker": "SN",
+      "name": "SharkNinja, Inc.",
+      "exchange": "NYSE",
+      "sector": "Consumer Cyclical",
+      "industry": "Furnishings, Fixtures & Appliances"
+    },
+    {
+      "ticker": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "exchange": "NYSE",
+      "sector": "Financial Services",
+      "industry": "Banks - Diversified"
+    },
+    {
+      "ticker": "V",
+      "name": "Visa Inc. ",
+      "exchange": "NYSE",
+      "sector": "Financial Services",
+      "industry": "Credit Services"
+    },
+    {
+      "ticker": "CRM",
+      "name": "Salesforce, Inc.",
+      "exchange": "NYSE",
+      "sector": "Technology",
+      "industry": "Software - Application"
+    },
+    {
+      "ticker": "LRCX",
+      "name": "Lam Research Corporation",
+      "exchange": "NASDAQ",
+      "sector": "Technology",
+      "industry": "Semiconductor Equipment & Materials"
+    },
+    {
+      "ticker": "SBUX",
+      "name": "Starbucks Corporation",
+      "exchange": "NASDAQ",
+      "sector": "Consumer Cyclical",
+      "industry": "Restaurants"
+    },
+    {
+      "ticker": "NKE",
+      "name": "NIKE, Inc.",
+      "exchange": "NYSE",
+      "sector": "Consumer Cyclical",
+      "industry": "Footwear & Accessories"
+    }
+  ]
+}
