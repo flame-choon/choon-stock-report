@@ -23,6 +23,7 @@ def lambda_handler(event: dict, context: Any) -> dict:
     """
     DynamoDB에서 stock ticker 데이터를 조회하고 배치로 분할하여 반환
 
+    
     Returns:
         dict: Step Functions에서 사용할 배치 데이터
             - batches: 분할된 ticker 데이터 배열
