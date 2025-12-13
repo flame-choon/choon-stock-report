@@ -92,7 +92,7 @@ jobs:
           FOLDER="${{ matrix.folder }}"
           case "$FOLDER" in
             "add-stock-tickers")
-              LAMBDA_NAME="choon-add-stock-tickers"
+              LAMBDA_NAME="choon-prd-apne2-add-stock-tickers"
               ;;
             "get-stock-tickers")
               LAMBDA_NAME="choon-prd-apne2-get-stock-tickers"
