@@ -16,6 +16,10 @@ on:
 env:
   AWS_REGION: ap-northeast-2
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   detect-changes:
     name: Detect Changed Lambda Functions

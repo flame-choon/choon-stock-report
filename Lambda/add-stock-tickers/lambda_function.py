@@ -18,7 +18,8 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     """
     AWS Lambda 핸들러 함수
     DynamoDB에 주식 티커 정보를 저장합니다.
-    
+
+        
     Args:
         event: Lambda 이벤트 데이터
             예상 형식:
