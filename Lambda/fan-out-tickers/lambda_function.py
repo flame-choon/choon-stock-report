@@ -1,10 +1,9 @@
 """
 Fan-out Tickers Lambda 함수
 
-get-stock-tickers Lambda 함수에서 반환된 ticker 데이터를 개별적으로 SQS로 전송합니다.
+get-stock-tickers Lambda 함수에서 반환된 배치 데이터를 개별 ticker 메시지 배열로 변환합니다.
+Step Functions의 Map 상태에서 SQS로 전달하기 위한 형식으로 출력합니다.
 """
-import boto3
-import json
 import logging
 from typing import Any
 
@@ -12,13 +11,10 @@ from typing import Any
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# SQS 설정
-SQS_QUEUE_URL = "https://sqs.ap-northeast-2.amazonaws.com/879780444466/choon-prd-apne2-stock-analysis-jobs-queue"
-
 
 def lambda_handler(event: dict, context: Any) -> dict:
     """
-    get-stock-tickers에서 받은 ticker 데이터를 개별적으로 SQS 큐로 전송
+    get-stock-tickers에서 받은 배치 데이터를 개별 ticker 메시지 배열로 변환
 
     Args:
         event: get-stock-tickers Lambda의 반환값
@@ -28,14 +24,12 @@ def lambda_handler(event: dict, context: Any) -> dict:
             - total_count: 전체 ticker 수
 
     Returns:
-        dict: SQS 전송 결과
+        dict: Step Functions Map 상태에서 SQS로 전달할 데이터
             - job_id: 작업 ID
-            - sent_count: 전송된 메시지 수
-            - failed_count: 실패한 메시지 수
-            - status: 처리 상태
+            - timestamp: 타임스탬프
+            - total_count: 전체 ticker 수
+            - messages: SQS로 전송할 개별 메시지 배열
     """
-    sqs = boto3.client('sqs', region_name='ap-northeast-2')
-
     job_id = event.get('job_id', 'unknown')
     batches = event.get('batches', [])
     timestamp = event.get('timestamp', '')
@@ -46,62 +40,23 @@ def lambda_handler(event: dict, context: Any) -> dict:
 
     logger.info(f"작업 시작 - job_id: {job_id}, ticker 수: {len(tickers)}")
 
-    sent_count = 0
-    failed_count = 0
-    failed_tickers = []
-
+    # Step Functions Map 상태에서 SQS로 전달할 메시지 배열 생성
+    messages = []
     for index, ticker_data in enumerate(tickers):
-        try:
-            ticker_symbol = ticker_data.get('ticker', 'unknown')
+        message = {
+            'job_id': job_id,
+            'timestamp': timestamp,
+            'index': index,
+            'total_count': total_count,
+            'ticker': ticker_data
+        }
+        messages.append(message)
 
-            message_body = {
-                'job_id': job_id,
-                'timestamp': timestamp,
-                'index': index,
-                'total_count': total_count,
-                'ticker': ticker_data
-            }
+    logger.info(f"작업 완료 - job_id: {job_id}, 생성된 메시지 수: {len(messages)}")
 
-            response = sqs.send_message(
-                QueueUrl=SQS_QUEUE_URL,
-                MessageBody=json.dumps(message_body, ensure_ascii=False),
-                MessageAttributes={
-                    'job_id': {
-                        'DataType': 'String',
-                        'StringValue': job_id
-                    },
-                    'ticker': {
-                        'DataType': 'String',
-                        'StringValue': ticker_symbol
-                    }
-                }
-            )
-
-            logger.debug(f"ticker {ticker_symbol} 전송 완료 - MessageId: {response['MessageId']}")
-            sent_count += 1
-
-        except Exception as e:
-            ticker_symbol = ticker_data.get('ticker', 'unknown')
-            logger.error(f"ticker {ticker_symbol} 전송 실패: {str(e)}")
-            failed_count += 1
-            failed_tickers.append({
-                'ticker': ticker_symbol,
-                'error': str(e)
-            })
-
-    status = 'success' if failed_count == 0 else ('partial_failure' if sent_count > 0 else 'failure')
-
-    result = {
+    return {
         'job_id': job_id,
-        'sent_count': sent_count,
-        'failed_count': failed_count,
-        'total_tickers': len(tickers),
-        'status': status
+        'timestamp': timestamp,
+        'total_count': total_count,
+        'messages': messages
     }
-
-    if failed_tickers:
-        result['failed_tickers'] = failed_tickers
-
-    logger.info(f"작업 완료 - job_id: {job_id}, 전송: {sent_count}, 실패: {failed_count}")
-
-    return result
