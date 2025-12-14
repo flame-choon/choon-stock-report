@@ -97,6 +97,9 @@ jobs:
             "get-stock-tickers")
               LAMBDA_NAME="choon-prd-apne2-get-stock-tickers"
               ;;
+            "fan-out-tickers")
+              LAMBDA_NAME="choon-prd-apne2-fan-out-tickers"
+              ;;
             *)
               # 기본: 폴더명 그대로 사용
               LAMBDA_NAME="choon-prd-apne2-$FOLDER"
